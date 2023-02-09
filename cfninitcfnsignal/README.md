@@ -1,22 +1,14 @@
-# Readme for AWS CloudFormation Template
+# CloudFormation Stack
+
+This CloudFormation stack creates an EC2 instance and sets up an Apache web server with a custom message.
 
 ## Parameters
-The following parameters are defined in the CloudFormation template:
-
-### LatestAmiId
-This parameter defines the Amazon Machine Image (AMI) that will be used for EC2 instances. The default value is the latest version of the Amazon Linux AMI.
-
-### Message
-This parameter sets the message that will appear on the HTML page. The default value is "Cats are the best".
+- `LatestAmiId`: The latest Amazon Linux AMI ID. The default value is `/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2`.
+- `Message`: The message to be displayed on the HTML page. The default value is `"Cats are the best"`.
 
 ## Resources
-The following resources will be created as part of the CloudFormation stack:
+- `InstanceSecurityGroup`: The security group for the EC2 instance. This security group allows incoming traffic on port 22 (SSH) and port 80 (HTTP).
+- `Bucket`: An S3 bucket that stores data.
+- `Instance`: The EC2 instance. The instance runs Amazon Linux and sets up an Apache web server. The message from the `Message` parameter is displayed on the default HTML page.
 
-### InstanceSecurityGroup
-This resource creates an EC2 Security Group that allows SSH and HTTP access via port 22 (IPv4) and port 80 (IPv4), respectively.
 
-### Bucket
-This resource creates an S3 bucket.
-
-### Instance
-This resource creates an EC2 instance using the specified AMI, security group, and user data. The user data script will update the instance, install the Apache web server, and create an HTML page with the specified message. The instance creation process will be signaled as complete after 15 minutes or when the user data script finishes.
